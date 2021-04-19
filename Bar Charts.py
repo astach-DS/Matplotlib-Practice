@@ -1,5 +1,6 @@
 from matplotlib import pyplot as plt
 import pandas as pd
+import numpy as np
 #print(plt.style.available)
 plt.style.use('fivethirtyeight')
 
@@ -12,8 +13,12 @@ py_dev_y = [20046, 17100, 20000, 24744, 30500, 37732, 41247, 45372, 48876, 53850
 dev_y = [17784, 16500, 18012, 20628, 25206, 30252, 34368, 38496, 42000, 46752, 49320, 53200, 56000, 62316, 64928, 67317, 68748, 73752, 77232,
          78000, 78508, 79536, 82488, 88935, 90000, 90056, 95000, 90000, 91633, 91660, 98150, 98964, 100000, 98988, 100000, 108923, 105000, 103117]
 
-plt.plot(ages_x,py_dev_y,label='Python Devs')
-plt.plot(ages_x,dev_y,linestyle='--',color = 'k',label='All Devs') #Color could be in hexa code #5a7d9a
+# Set the x_indexes to be able to set the bars close to the oder by a margin of width
+x_indexes = np.arange(len(ages_x))
+width = 0.25
+
+plt.bar(x_indexes,py_dev_y,label='Python Devs',width=width)
+plt.bar(x_indexes+width,dev_y,linestyle='--',width=width,color = 'k',label='All Devs') #Color could be in hexa code #5a7d9a
 
 plt.title('Median Salary (USD) by Age')
 
@@ -21,7 +26,8 @@ plt.xlabel('Ages')
 plt.ylabel('Median Salary (USD)')
 
 plt.tight_layout()
-
+# Means where x_indexes are set xticks laberls equals to ages_x
+plt.xticks(x_indexes,ages_x)
 
 #plt.grid(True)
 
